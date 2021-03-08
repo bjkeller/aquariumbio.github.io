@@ -1,0 +1,47 @@
+.support {
+    position: static;
+    width: 1920px;
+    height: 982px;
+    left: 0px;
+    top: 3319px;
+    
+    background: #2399CC;
+}
+
+.headlineText {
+    position: absolute;
+    width: 383px;
+    height: 60px;
+    left: 770px;
+    top: 3454.68px;
+    
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 60px;
+    /* identical to box height */
+    
+    text-align: center;
+    
+    color: #FFFFFF;
+}
+
+.generalText {
+    position: absolute;
+    width: 968px;
+    height: 30px;
+    left: 476px;
+    top: 3538.68px;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 30px;
+    /* identical to box height, or 143% */
+    
+    text-align: center;
+    
+    color: #FFFFFF;
+}

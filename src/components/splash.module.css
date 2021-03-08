@@ -1,0 +1,46 @@
+.splash {
+    position: static;
+    width: 1922px;
+    height: 750px;
+    left: 0px;
+    top: 86px;
+    background: #2399CC;
+}
+
+.headlineText {
+    position: absolute;
+    width: 1055px;
+    height: 146px;
+    left: 433px;
+    top: 159px;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 66px;
+    /* or 132% */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.generalText {
+    position: absolute;
+    width: 780px;
+    height: 54px;
+    left: 570px;
+    top: 322px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 28px;
+    /* or 133% */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}

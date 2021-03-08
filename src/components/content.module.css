@@ -1,0 +1,46 @@
+.content {
+    position: static;
+    width: 1920px;
+    height: 849px;
+    left: 0px;
+    top: 105.32px;
+
+    background: linear-gradient(229.75deg, #A6EEFA -8.47%, #2399CC 170.4%);
+    opacity: 0.5;
+}
+
+.headlineText {
+    position: absolute;
+    width: 1296px;
+    height: 64px;
+    left: 312px;
+    top: 105.32px;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 60px;
+    text-align: center;
+
+    color: #333333;
+}
+
+.generalText {
+    position: absolute;
+    width: 1174px;
+    height: 90px;
+    left: 373px;
+    top: 2677.32px;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 30px;
+    /* or 143% */
+    
+    text-align: center;
+    
+    color: #333333;
+}
