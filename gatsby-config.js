@@ -9,6 +9,16 @@ module.exports = {
     "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-theme-material-ui",
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `roboto`,
+          `lato`
+        ],
+        display: 'swap'
+      }
+    },
     "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",
