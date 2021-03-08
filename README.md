@@ -20,6 +20,10 @@ This repo is setup to run as a VS Code devcontainer.
 - https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/how-gatsby-works-with-github-pages/
 - https://www.gatsbyjs.com/plugins/gatsby-transformer-sharp/
 - https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/
+- https://www.gatsbyjs.com/plugins/gatsby-plugin-google-fonts/ (don't think this is needed if use material-ui properly)
+
+
+example using material ui: https://github.com/mui-org/material-ui/tree/master/examples/gatsby-theme
 
 <!-- <p align="center">
   <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
