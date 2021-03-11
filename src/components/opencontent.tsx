@@ -1,5 +1,6 @@
 import React from 'react'
-import * as styles from "./content.module.css"
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
 
 export interface ContentProps {
     headline: String,
@@ -7,10 +8,14 @@ export interface ContentProps {
 }
 
 const Content = ({headline, text}:ContentProps) => (
-    <div className={styles.content}>
-        <h1 className={styles.headlineText}>{headline}</h1>
-        <p className={styles.generalText}>{text}</p>
-    </div>
+    <Box>
+        <Typography variant='h2' align='center'>
+            {headline}
+        </Typography>
+        <Typography variant='body2' align='center'>
+            {text}
+        </Typography>
+    </Box>
 )
 
 export default Content

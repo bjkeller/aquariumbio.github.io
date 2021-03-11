@@ -1,12 +1,14 @@
 import React from 'react'
-import * as styles from "./footer.module.css"
+import Box from '@material-ui/core/Box'
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
 
 const Footer = () => (
-    <div className={styles.footer}>
-        <footer>
+    <footer>
+        <Typography variant='body2' align='center'>
             The footer
-        </footer>
-    </div>
+        </Typography>
+    </footer>
 )
 
 export default Footer

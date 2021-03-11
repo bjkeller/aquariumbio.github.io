@@ -1,5 +1,7 @@
 import React from 'react'
-import * as styles from "./feature.module.css"
+import Box from '@material-ui/core/Box'
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
 
 export interface FeatureProps {
     headline: String,
@@ -7,11 +9,11 @@ export interface FeatureProps {
 }
 
 const Feature = ({ headline, text }:FeatureProps) => (
-    <div className={styles.feature}>
-        <h1 className={styles.headlineText}>{headline}</h1>
+    <Box>
+        <Typography variant='h2' align='center'>{headline}</Typography>
         <p>image goes here</p>
-        <p className={styles.generalText}>{text}</p>
-    </div>
+        <Typography variant='body2' align='center'>{text}</Typography>
+    </Box>
 )
 
 export default Feature

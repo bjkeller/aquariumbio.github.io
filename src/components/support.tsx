@@ -1,5 +1,6 @@
 import React from 'react'
-import * as styles from "./support.module.css"
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
 
 export interface SupportProps {
     headline: String,
@@ -7,10 +8,14 @@ export interface SupportProps {
 }
 
 const Support = ({headline, text}: SupportProps) => (
-    <div className={styles.support}>
-        <h1 className={styles.headlineText}>{headline}</h1>
-        <p className={styles.generalText}>{text}</p>
-    </div>
+    <Box>
+        <Typography variant='h2' align='center'>
+            {headline}
+        </Typography>
+        <Typography variant='body2' align='center'>
+            {text}
+        </Typography>
+    </Box>
 )
 
 export default Support

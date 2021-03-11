@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 import Splash from "../components/splash"
 import Feature from "../components/feature"
 import Features from "../components/features"
-import Content from "../components/content"
+import Content from "../components/opencontent"
 import Support from "../components/support"
 
 export default function IndexRoute() {
