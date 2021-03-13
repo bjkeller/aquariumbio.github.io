@@ -1,14 +1,14 @@
 import React from 'react'
-import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
 
 export interface FeatureProps {
     children: JSX.Element[] | JSX.Element
 }
 
 const Features = ({ children }: FeatureProps) => (
-    <Box>
+    <Grid container>
         {children}
-    </Box>
+    </Grid>
 )
 
 export default Features
