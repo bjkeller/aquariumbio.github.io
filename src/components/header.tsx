@@ -1,36 +1,26 @@
-import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
+import { AppBar, Toolbar } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
+import AquariumLogo from "./aquariumlogo"
+import HeaderLinks from './headerlinks'
 
-type QueryProps = {
-    site: {
-        siteMetadata: {
-            title: string
-        }
-    }
-}
-
-const HEADER_QUERY = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
+const useStyles = makeStyles({
+  header: {
+    height: 91,
+    flexGrow: 1
   }
-`
+})
 
 const Header = () => {
-    const data = useStaticQuery<QueryProps>(HEADER_QUERY)
-    const { title } = data.site.siteMetadata
+    const classes = useStyles();
 
     return (
-        <header>
-            <div>
-                <h1>
-                    {title}
-                </h1>
-            </div>
-        </header>
+        <AppBar position='static' className={classes.header} color='default'>
+            <Toolbar>
+                <AquariumLogo />
+                <HeaderLinks />
+            </Toolbar>
+        </AppBar>
     )
 }
 
