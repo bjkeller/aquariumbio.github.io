@@ -1,21 +1,26 @@
 import React from "react"
 import { StaticImage } from 'gatsby-plugin-image'
+
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from "@material-ui/core/styles"
 import Typography from '@material-ui/core/Typography'
+import splashImage from '../images/homepage.svg'
 
 const useStyles = makeStyles((theme) => ({
     splashPage: {
-        backgroundColor: '#2399CC',
-        height: 750
+        backgroundImage: `url(${splashImage})`, 
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        height: 750,
+        width: '100%',
+
     },
     headlineText: {
         fontFamily: 'Lato',
         fontSize: 50,
         fontStyle: 'normal',
         fontWeight: 400,
-        // lineHeight: 66,
-        // letterSpacing: 0,
         textAlign: 'center',
         color: '#FFFFFF',
         width: 1055
@@ -53,13 +58,15 @@ interface IconProps {
     title: string
 }
 
-const FeatureIcon = ({ children, title}: IconProps) => {
+const FeatureIcon = ({ children, title }: IconProps) => {
     const classes = useStyles();
 
     return (
         <Grid item container xs={1} direction='column' alignItems='center'>
             <Grid item>
                 {children}
+            </Grid>
+            <Grid item>
                 <Typography variant='body2' className={classes.iconText}>
                     {title}
                 </Typography>
@@ -67,24 +74,25 @@ const FeatureIcon = ({ children, title}: IconProps) => {
         </Grid>
     )
 }
+
 const ComposeIcon = () => (
-        <FeatureIcon title='COMPOSE'>
-            <StaticImage
+    <FeatureIcon title='COMPOSE'>
+        <StaticImage
             src="../images/compose-icon.png"
             alt="Icon for compose feature"
             width={77}
             height={77}
-            />
-        </FeatureIcon>
-    )
+        />
+    </FeatureIcon>
+)
 
 const ManageIcon = () => (
     <FeatureIcon title='MANAGE'>
         <StaticImage
-        src="../images/manage-icon.png"
-        alt="Icon for manage feature"
-        width={77}
-        height={77}
+            src="../images/manage-icon.png"
+            alt="Icon for manage feature"
+            width={77}
+            height={77}
         />
     </FeatureIcon>
 )
@@ -92,10 +100,10 @@ const ManageIcon = () => (
 const ExperimentIcon = () => (
     <FeatureIcon title='EXPERIMENT'>
         <StaticImage
-        src="../images/experiment-icon.png"
-        alt="Icon for experiment feature"
-        width={77}
-        height={77}
+            src="../images/experiment-icon.png"
+            alt="Icon for experiment feature"
+            width={77}
+            height={77}
         />
     </FeatureIcon>
 )
@@ -103,10 +111,10 @@ const ExperimentIcon = () => (
 const DataIcon = () => (
     <FeatureIcon title='DATA'>
         <StaticImage
-        src="../images/data-icon.png"
-        alt="Icon for data feature"
-        width={77}
-        height={77}
+            src="../images/data-icon.png"
+            alt="Icon for data feature"
+            width={77}
+            height={77}
         />
     </FeatureIcon>
 )
@@ -116,8 +124,8 @@ const Splash = () => {
 
     return (
         <Grid item container direction='column' alignItems='center' className={classes.splashPage}>
-            <Grid item  className={classes.topSpacer} />
-            <Grid item>
+            <Grid item className={classes.topSpacer} />
+            <Grid item >
                 <Typography variant='h2' className={classes.headlineText}>
                     Executable Protocols, Reproducible Results, Breakthrough Discoveries
                 </Typography>
@@ -131,10 +139,12 @@ const Splash = () => {
             <Grid item className={classes.iconSpacer} />
 
             <Grid item container direction='row' alignItems='center'>
+                <Grid item xs={4}/>
                 <ComposeIcon />
                 <ManageIcon />
                 <ExperimentIcon />
                 <DataIcon />
+                <Grid item xs={4}/>
             </Grid>
         </Grid>
     )

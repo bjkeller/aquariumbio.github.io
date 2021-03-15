@@ -5,6 +5,7 @@ import Feature from "../components/feature"
 import Features from "../components/features"
 import Content from "../components/opencontent"
 import Support from "../components/support"
+import { StaticImage } from "gatsby-plugin-image"
 
 export default function IndexRoute() {
   return (
@@ -16,19 +17,47 @@ export default function IndexRoute() {
           headline="Compose  Experiments With Confidence"
           text="Build experimental plans from modular protocols that yield precise 
           and predictable directions at the bench. Aquarium protocols increase reproducibility, reduce mistakes, and seamlessly track metadata. "
-        />
+        >
+          <StaticImage
+            src="../images/compose-desktop.svg"
+            alt="Compose screen display"
+            width={476.81}
+            height={379.09}
+          />
+        </Feature>
         <Feature
           headline="Manage Your Lab in One Place"
           text="Realize lab efficiencies by managing research scientists’ inbound experiments, organizing jobs around similar protocol operations, and assigning and overseeing bench work."
-        />
+        >
+          <StaticImage
+            src="../images/manage-desktop.svg"
+            alt="Compose screen display"
+            width={476.81}
+            height={379.09}
+          />
+        </Feature>
         <Feature
           headline="Experiment with Detailed Protocols"
           text="Aquarium gives you context-specific, step-by-step instructions in real time.  That means no more looking for samples, making mistakes in calculations, or forgetting steps."
-        />
+        >
+          <StaticImage
+            src="../images/experiment-desktop.svg"
+            alt="Experiment screen display"
+            width={476.81}
+            height={379.09}
+          />
+        </Feature>
         <Feature
           headline="Put Your Data Where It Belongs"
           text="Aquarium captures everything—from imported sample history to job tracking to experiment results—as you go. "
-        />
+        >
+          <StaticImage
+            src="../images/data-desktop.svg"
+            alt="Data screen display"
+            width={476.81}
+            height={379.09}
+          />
+        </Feature>
       </Features>
       <Content
         headline="Open Content Science"

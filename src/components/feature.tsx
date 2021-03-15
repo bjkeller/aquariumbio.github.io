@@ -28,24 +28,41 @@ const useStyles = makeStyles((theme) => ({
         // letter-spacing: 0px;
         textAlign: 'left',
         width: 576
+    },
+    topSpacer: {
+        height: '61px'
+    },
+    midSpacer: {
+        height: '19px'
+    },
+    imageSpacer: {
+        height: '30px'
     }
-}))
+}));
 
 export interface FeatureProps {
+    children: JSX.Element[] | JSX.Element, 
     headline: String,
     text: String
 }
 
-const Feature = ({ headline, text }: FeatureProps) => {
+const Feature = ({ children, headline, text }: FeatureProps) => {
     const classes = useStyles();
 
     return (
-        <Grid item container direction='column' alignItems='center' className={classes.featureCard}>
-            <Box>
+        <Grid item container xs={6} direction='column' alignItems='center' className={classes.featureCard}>
+            <Grid item className={classes.topSpacer} />
+            <Grid item>
                 <Typography variant='h2' className={classes.headlineText}>{headline}</Typography>
-                <p>image goes here</p>
+            </Grid>
+            <Grid item className={classes.midSpacer} />
+            <Grid item>
+                {children}
+            </Grid>
+            <Grid item className={classes.imageSpacer} />
+            <Grid item>
                 <Typography variant='body2' className={classes.decriptionText}>{text}</Typography>
-            </Box>
+            </Grid>
         </Grid>
     )
 }

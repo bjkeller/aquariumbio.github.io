@@ -1,5 +1,4 @@
 import React from 'react'
-import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core'
@@ -30,6 +29,15 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: '#FFFFFF',
         width: 968
+    },
+    topSpacer: {
+        height: '135px'
+    },
+    midSpacer: {
+        height: '24px'
+    },
+    formSpacer: {
+        height: '42px'
     }
 }))
 
@@ -43,13 +51,21 @@ const Support = ({ headline, text }: SupportProps) => {
 
     return (
         <Grid container direction='column' alignItems='center' className={classes.supportCard}>
+            <Grid item xs={12} className={classes.topSpacer} />
             <Grid item xs={12}>
                 <Typography variant='h2' className={classes.headlineText}>
                     {headline}
                 </Typography>
+            </Grid>
+            <Grid item xs={12} className={classes.midSpacer} />
+            <Grid item xs={12}>
                 <Typography variant='body2' className={classes.descriptionText}>
                     {text}
                 </Typography>
+            </Grid>
+            <Grid item xs={12} className={classes.formSpacer} />
+            <Grid item xs={12}>
+                form
             </Grid>
         </Grid>
     )

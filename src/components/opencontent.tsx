@@ -28,6 +28,18 @@ const useStyles = makeStyles((theme) => ({
         // letter-spacing: 0px;
         textAlign: 'center',
         width: 1174
+    },
+    topSpacer: {
+        height: '105px'
+    },
+    midSpacer: {
+        height: '38px'
+    },
+    cardSpacer: {
+        height: '52px'
+    },
+    buttonSpacer: {
+        height: '37px'
     }
 }))
 
@@ -41,14 +53,25 @@ const Content = ({ headline, text }: ContentProps) => {
 
     return (
         <Grid container direction='column' alignItems='center' className={classes.openContentCard}>
-            <Box>
+            <Grid item className={classes.topSpacer} />
+            <Grid item>
                 <Typography variant='h2' className={classes.headlineText}>
                     {headline}
                 </Typography>
+            </Grid>
+            <Grid item className={classes.midSpacer} />
+            <Grid item>
                 <Typography variant='body2' className={classes.descriptionTest}>
                     {text}
                 </Typography>
-            </Box>
+            </Grid>
+            <Grid item className={classes.cardSpacer} />
+            <Grid item>
+                cards go here
+            </Grid>
+            <Grid item className={classes.buttonSpacer} />
+            <Grid item>button</Grid>
+
         </Grid>
     )
 }
