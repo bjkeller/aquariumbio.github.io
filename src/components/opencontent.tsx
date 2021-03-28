@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core'
+import WorkflowCard from './workflowcard'
 
 const useStyles = makeStyles((theme) => ({
     openContentCard: {
@@ -66,8 +67,23 @@ const Content = ({ headline, text }: ContentProps) => {
                 </Typography>
             </Grid>
             <Grid item className={classes.cardSpacer} />
-            <Grid item>
-                cards go here
+            <Grid item container direction='row' alignItems='center' spacing={1}>
+                <WorkflowCard 
+                    workflow='Simple Workflow' 
+                    description='A workflow to demonstrate.'
+                />
+                <WorkflowCard 
+                    workflow='Simple Workflow' 
+                    description='A workflow to demonstrate.'
+                />
+                <WorkflowCard 
+                    workflow='Simple Workflow' 
+                    description='A workflow to demonstrate.'
+                />
+                <WorkflowCard 
+                    workflow='Simple Workflow' 
+                    description='A workflow to demonstrate.'
+                />
             </Grid>
             <Grid item className={classes.buttonSpacer} />
             <Grid item>button</Grid>
