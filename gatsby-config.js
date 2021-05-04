@@ -2,7 +2,12 @@ module.exports = {
   siteMetadata: {
     title: "Aquarium",
   },
-  flags: { PRESERVE_WEBPACK_CACHE: true },
+  flags: { 
+    DEV_SSR: true,
+    FAST_DEV: true,
+    PARALLEL_SOURCING: true,
+    PRESERVE_WEBPACK_CACHE: true 
+  },
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
