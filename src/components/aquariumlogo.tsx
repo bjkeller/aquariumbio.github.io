@@ -1,6 +1,11 @@
 import React from 'react';
 import { SvgIcon } from '@material-ui/core';
 
+// TODO: figure out how to make this work --- doesn't have to be svgicon
+// this is function material-ui uses for icons
+// https://github.com/mui-org/material-ui/blob/398684450a89ef2cf167d56be3e1a95ea1763f7a/packages/material-ui/src/utils/createSvgIcon.js#L7
+// see, for instance: https://github.com/mui-org/material-ui/blob/next/packages/material-ui-icons/custom/Apple.js
+
 const AquariumLogo = () => (
     <SvgIcon
         width={62}
