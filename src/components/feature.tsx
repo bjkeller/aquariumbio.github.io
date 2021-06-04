@@ -5,6 +5,9 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles, rgbToHex } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
+    // TODO: features have different backgrounds with layered images
+    // may need to pass in theme with props -- covered by material-ui docs?
+    // see note in features.tsx
     featureCard: {
         height: 702,
         background: 'linear-gradient(0deg, rgba(64, 211, 253, 0.15) 0%, rgba(203, 241, 255, 0.0257813) 82.81%, rgba(232, 248, 255, 0) 100%)',
