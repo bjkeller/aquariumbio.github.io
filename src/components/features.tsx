@@ -18,7 +18,7 @@ const Features = ({ children }: FeatureProps) => {
     const classes = useStyles();
 
     return (
-    <div className={classes.featurePage}>
+    <div className={classes.featuresPage}>
         <Grid container>
             {children}
         </Grid>
