@@ -1,21 +1,31 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import { Container } from '@material-ui/core'
+import { Container, makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+    featuresPage: {
+        flexGrow: 1,
+        width: '100%'
+    }
+}));
 
 export interface FeatureProps {
     children: JSX.Element[] | JSX.Element
 }
 
-const Features = ({ children }: FeatureProps) => (
-    <Container>
+const Features = ({ children }: FeatureProps) => {
+    const classes = useStyles();
+
+    return (
+    <div className={classes.featurePage}>
         <Grid container>
             {children}
         </Grid>
         <Button variant="contained">
             Get Started
         </Button>
-    </Container>
-)
+    </div>
+)}
 
 export default Features
