@@ -1,8 +1,17 @@
 # Aquarium.bio site
 
+This repo is setup to run as a VS Code devcontainer.
+
+Steps:
+
+1. Click the devcontainer button, and choose `Reopen in container`.
+   This will setup an Ubuntu Docker Typescript container with Node 14 and gatsbyjs-cli installed globally.
+2. Install site dependencies by running `npm install`
+3. Run the site in development mode with `gatsby develop` or `npm start`.
+
 ## configuration notes
 
-This repo is setup to run as a VS Code devcontainer.
+
 
 1. cloned repo from github. then created gatsby-pages branch b/c master/main is used for publishing pages.
 2. created project with `npm init gatsby` into another directory and then copied everything but .git and node_modules.
