@@ -20,12 +20,12 @@ export interface FeatureProps {
 const Features = ({ children }: FeatureProps) => {
     const classes = useStyles();
 
+    // TODO: add button target to support pane
     return (
     <div className={classes.featuresPage}>
         <Grid container>
             {children}
         </Grid>
-        // TODO: link to support pane
         <Button variant="contained">
             Get Started
         </Button>
