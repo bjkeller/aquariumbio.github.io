@@ -1,7 +1,7 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import { Container, makeStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 
 // TODO: format button
 // TODO: bottom two cards have background images
