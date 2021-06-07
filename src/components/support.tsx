@@ -5,16 +5,18 @@ import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     supportCard: {
+        backgroundColor: '#2399CC',
+        backgroundSize: 'cover',
+        backgroundPostion: 'center',
+        backgroundRepeat: 'no-repeat',
         height: 982,
-        backgroundColor: '#2399CC'
+        width: '100%',
     },
     headlineText: {
         fontFamily: 'Lato',
         fontSize: 50,
         fontStyle: 'normal',
         fontWeight: 400,
-        // line-height: 60px;
-        // letter-spacing: 0px;
         textAlign: 'center',
         color: '#FFFFFF',
         width: 383
@@ -50,21 +52,21 @@ const Support = ({ headline, text }: SupportProps) => {
     const classes = useStyles();
 
     return (
-        <Grid container direction='column' alignItems='center' className={classes.supportCard}>
-            <Grid item xs={12} className={classes.topSpacer} />
-            <Grid item xs={12}>
+        <Grid item container direction='column' alignItems='center' className={classes.supportCard}>
+            <Grid item className={classes.topSpacer} />
+            <Grid item >
                 <Typography variant='h2' className={classes.headlineText}>
                     {headline}
                 </Typography>
             </Grid>
-            <Grid item xs={12} className={classes.midSpacer} />
-            <Grid item xs={12}>
+            <Grid item className={classes.midSpacer} />
+            <Grid item >
                 <Typography variant='body2' className={classes.descriptionText}>
                     {text}
                 </Typography>
             </Grid>
-            <Grid item xs={12} className={classes.formSpacer} />
-            <Grid item xs={12}>
+            <Grid item className={classes.formSpacer} />
+            <Grid item >
                 form
             </Grid>
         </Grid>
