@@ -4,10 +4,10 @@
 
 This repo is setup to run as a VS Code devcontainer.
 
-1. cloned repo from github. added devcontainer using node-12 since npm complains that some gatsby dependencies break under node 14. then created gatsby-pages branch b/c master/main is used for publishing pages.
+1. cloned repo from github. then created gatsby-pages branch b/c master/main is used for publishing pages.
 2. created project with `npm init gatsby` into another directory and then copied everything but .git and node_modules.
    select responsive images, react helmet, and mdx.
-   Then ran npm install. (gatsby uses )
+   Then ran npm install.
 
 3. These are installed:
 
