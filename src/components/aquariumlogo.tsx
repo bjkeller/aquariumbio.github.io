@@ -8,8 +8,13 @@ import { SvgIcon } from '@material-ui/core';
 
 const AquariumLogo = () => (
     <SvgIcon
-        width={62}
-        height={62}
+        viewBox="0 0 223 219"
+        fontSize="large"
+        style={{
+            height: 61,
+            width: 62,
+            margin: "15px"
+        }}
     >
         <svg width="223" height="219" viewBox="0 0 223 219" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="223" height="219" fill="#40D3FD" />
