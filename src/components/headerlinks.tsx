@@ -1,20 +1,46 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
+import Link from '@material-ui/core/Link';
+import { Link as GatsbyLink } from 'gatsby';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+ root: {
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '18px',
+    lineHeight: '22px',
+    "&.MuiTypography-colorPrimary": {
+      color: '#2399CC',
+    },
+ }
+});
 
 const HeaderLinks = () => {
+    const classes = useStyles();
     return (
-        <Grid item container direction='row' alignItems='center' spacing={2}>
+        <Grid item container direction='row' alignItems='center' justify='space-evenly' spacing={2}>
+
             <Grid item>
-                features link
+                <Link component={GatsbyLink} to="/features" className={classes.root}>
+                    FEATURES
+                </Link>
             </Grid>
             <Grid item>
-                community workflows link
+                <Link component={GatsbyLink} to="/community_workflows" className={classes.root}>
+                    COMMUNITY WORKFLOWS
+                </Link>
             </Grid>
             <Grid item>
-                case studies link
+                <Link component={GatsbyLink} to="/case_studies" className={classes.root}>
+                    CASE STUDIES
+                </Link>
             </Grid>
             <Grid item>
-                get started link
+                <Link component={GatsbyLink} to="/get_started" className={classes.root}>
+                    GET STARTED
+                </Link>
             </Grid>
         </Grid>
     )
