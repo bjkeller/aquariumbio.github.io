@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import AquariumLogo from "./aquariumlogo"
 import HeaderLinks from './headerlinks'
 import Typography from '@material-ui/core/Typography';
+import { Link as GatsbyLink } from 'gatsby';
 
 const useStyles = makeStyles({
   header: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
   brandmark: {
     display: 'inline-flex',
     alignItems: 'center',
+    textDecoration: 'none',
   }
 
 })
@@ -34,10 +36,10 @@ const Header = () => {
     return (
         <AppBar position='static' className={classes.header} color='default'>
             <Toolbar  className={classes.header}>
-              <div className={classes.brandmark}>
+              <GatsbyLink to='/' className={classes.brandmark}>
                 <AquariumLogo />
                 <Typography variant='h4' classes={{ h4: classes.aquarium}}>Aquarium</Typography>
-              </div>
+              </GatsbyLink>
               <HeaderLinks />
             </Toolbar>
         </AppBar>

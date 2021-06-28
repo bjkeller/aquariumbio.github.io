@@ -23,22 +23,22 @@ const HeaderLinks = () => {
         <Grid item container direction='row' alignItems='center' justify='space-evenly' spacing={2}>
 
             <Grid item>
-                <Link component={GatsbyLink} to="/features" className={classes.root}>
+                <Link component={GatsbyLink} to="#features" className={classes.root}>
                     FEATURES
                 </Link>
             </Grid>
             <Grid item>
-                <Link component={GatsbyLink} to="/community_workflows" className={classes.root}>
+                <Link component={GatsbyLink} to="/community-workflows" className={classes.root}>
                     COMMUNITY WORKFLOWS
                 </Link>
             </Grid>
             <Grid item>
-                <Link component={GatsbyLink} to="/case_studies" className={classes.root}>
+                <Link component={GatsbyLink} to="/case-studies" className={classes.root}>
                     CASE STUDIES
                 </Link>
             </Grid>
             <Grid item>
-                <Link component={GatsbyLink} to="/get_started" className={classes.root}>
+                <Link component={GatsbyLink} to="/get-started" className={classes.root}>
                     GET STARTED
                 </Link>
             </Grid>

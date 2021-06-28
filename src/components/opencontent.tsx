@@ -54,7 +54,7 @@ const Content = ({ headline, text }: ContentProps) => {
     const classes = useStyles();
 
     return (
-        <Grid container direction='column' alignItems='center' className={classes.openContentCard}>
+        <Grid id="open-source-content" container direction='column' alignItems='center' className={classes.openContentCard}>
             <Grid item className={classes.topSpacer} />
             <Grid item>
                 <Typography variant='h2' className={classes.headlineText}>
