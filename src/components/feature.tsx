@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export interface FeatureProps {
-    children: JSX.Element[] | JSX.Element, 
+    children: JSX.Element[] | JSX.Element,
     headline: String,
     text: String
 }
@@ -53,17 +53,17 @@ const Feature = ({ children, headline, text }: FeatureProps) => {
     const classes = useStyles();
 
     return (
-        <Grid item container xs={6} direction='column' alignItems='center' className={classes.featureCard}>
-            <Grid item className={classes.topSpacer} />
-            <Grid item>
+        <Grid item container xs={6} direction='column' alignItems='center' className={classes.featureCard} zeroMinWidth>
+            <Grid item zeroMinWidth className={classes.topSpacer} />
+            <Grid item zeroMinWidth>
                 <Typography variant='h2' className={classes.headlineText}>{headline}</Typography>
             </Grid>
-            <Grid item className={classes.midSpacer} />
-            <Grid item>
+            <Grid item zeroMinWidth className={classes.midSpacer} />
+            <Grid item zeroMinWidth>
                 {children}
             </Grid>
-            <Grid item className={classes.imageSpacer} />
-            <Grid item>
+            <Grid item zeroMinWidth className={classes.imageSpacer} />
+            <Grid item zeroMinWidth>
                 <Typography variant='body2' className={classes.decriptionText}>{text}</Typography>
             </Grid>
         </Grid>

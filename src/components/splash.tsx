@@ -4,11 +4,11 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from "@material-ui/core/styles"
 import Typography from '@material-ui/core/Typography'
-import splashImage from '../images/homepage.svg'
+import splashImage from '../images/backgrounds/homepage.svg'
 
 const useStyles = makeStyles((theme) => ({
     splashPage: {
-        backgroundImage: `url(${splashImage})`, 
+        backgroundImage: `url(${splashImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
