@@ -2,11 +2,11 @@ module.exports = {
   siteMetadata: {
     title: "Aquarium",
   },
-  flags: { 
+  flags: {
     DEV_SSR: true,
     FAST_DEV: true,
     PARALLEL_SOURCING: true,
-    PRESERVE_WEBPACK_CACHE: true 
+    PRESERVE_WEBPACK_CACHE: true
   },
   plugins: [
     "gatsby-plugin-image",
@@ -19,7 +19,8 @@ module.exports = {
       options: {
         fonts: [
           `roboto`,
-          `lato`
+          `lato`,
+          "material icons"
         ],
         display: 'swap'
       }
