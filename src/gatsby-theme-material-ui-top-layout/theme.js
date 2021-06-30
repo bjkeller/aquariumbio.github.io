@@ -32,6 +32,32 @@ const theme = createMuiTheme({
                 }
             },
         },
+        MuiInputBase: {
+            root: {
+                backgroundColor: '#FFF',
+            },
+        },
+        MuiOutlinedInput: {
+            root: {
+                borderRadius: 0,
+                '&:hover fieldset, &.Mui-focused fieldset': {
+                    borderColor: '#40D3FD !important',
+                },
+
+            },
+        },
+        MuiFormLabel: {
+            root: {
+                color: '#aaa !important',
+            },
+        },
+        MuiLink: {
+            root: {
+                '&:hover': {
+                  transform: "scale3d(1.05, 1.05, 1)",
+                },
+            },
+        },
     }
 
 })

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Children } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core'
-import TextField from '@material-ui/core/TextField';
 import InputBase from '@material-ui/core/InputBase';
 import Contanier from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -25,75 +25,67 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: 5,
     },
     input: {
-      backgroundColor: theme.palette.common.white,
-      borderRadius: 0,
-      borderColor:theme.palette.common.white,
       width: '100%',
-      paddingLeft: 20,
-    },
-    label: {
-      color: '#FFF',
-      fontWeight: 'normal'
     },
     button: {
-      marginTop: 50
-    }
+      marginTop: theme.spacing(1),
+    },
+
 }));
 
-const ContactForm = () => {
+export interface ContactFormProps {
+    commentField?: boolean,
+}
+
+const ContactForm = ({ commentField, }: ContactFormProps) => {
   const classes = useStyles();
   return (
     <Contanier>
       <form method="post" action="#" className={classes.form}>
         <div className={classes.field}>
-          <label>
-            <Typography variant="caption" className={classes.label}>
-              First Name
-            </Typography>
-          </label>
-          <InputBase className={classes.input} type="text" name="first-name" id="first-name" placeholder="First Name"/>
+          <TextField variant="outlined" margin="dense" size="small" className={classes.input} type="text" name="first-name" id="first-name" label="First Name" />
         </div>
 
         <div className={classes.field}>
-          <label>
-            <Typography variant="caption" className={classes.label}>
-              Last Name
-            </Typography>
-          </label>
-          <InputBase className={classes.input} type="text" name="last-name" id="last-name" placeholder="Last Name" />
+          <TextField variant="outlined" margin="dense" size="small" className={classes.input} type="text" name="last-name" id="last-name" label="Last Name"/>
         </div>
 
         <div className={classes.field}>
-          <label>
-            <Typography variant="caption" className={classes.label}>
-              Email
-            </Typography>
-          </label>
-          <InputBase className={classes.input} type="text" name="email" id="email" placeholder="Email" />
+          <TextField variant="outlined" margin="dense" size="small" className={classes.input} type="text" name="email" id="email" label="Email"/>
         </div>
 
         <div className={classes.field}>
-          <label>
-            <Typography variant="caption" className={classes.label}>
-              Lab/Organization/Company
-            </Typography>
-          </label>
-          <InputBase className={classes.input} type="text" name="lab" id="lab" placeholder="Lab/Organization/Company" />
+          <TextField variant="outlined" margin="dense" size="small" className={classes.input} type="text" name="lab" id="lab" label="Lab/Organization/Company"/>
         </div>
 
         <div className={classes.field}>
-          <label>
-            <Typography variant="caption" className={classes.label}>
-              Role
-            </Typography>
-          </label>
           {/* TO DO: Roles should be a select menu */}
-          <InputBase className={classes.input} type="text" name="role" id="role" placeholder="Role" />
+          <TextField variant="outlined" margin="dense" size="medium" className={classes.input} type="text" name="role" id="role" label="Role"/>
         </div>
+
+        {commentField && (
+            <div className={classes.field}>
+              <TextField
+                type="text"
+                rows="4"
+                placeholder="I’m having trouble with Aquarium."
+                id="contact-message"
+                name="contact-message"
+                className={classes.input}
+                multiline
+                variant="outlined"
+              />
+            </div>
+          )}
+
         <Button variant="contained" type="submit" className={classes.button}>Contact Now</Button>
       </form>
     </Contanier>
   )
 }
+
+ContactForm.defaultProps = {
+  commentField: false,
+};
 
 export default ContactForm

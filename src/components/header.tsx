@@ -34,7 +34,7 @@ const Header = () => {
     const classes = useStyles();
 
     return (
-        <AppBar position='static' className={classes.header} color='default'>
+        <AppBar position='static' className={classes.header} color='default' color="transparent">
             <Toolbar  className={classes.header}>
               <GatsbyLink to='/' className={classes.brandmark}>
                 <AquariumLogo />
