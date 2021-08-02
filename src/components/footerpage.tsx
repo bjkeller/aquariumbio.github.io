@@ -3,14 +3,14 @@ import Layout from "../components/layout";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import SubNav from '../components/subnav';
+import FooterPageSubNav from './footerpagesubnav';
 import Divider from "@material-ui/core/Divider";
 import FooterPageBottomNav from '../components/footerpagebottomnav';
 import { string, bool, oneOf, node } from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: '50px 375px'
+    padding: '50px 20%'
   },
   header: {
     fontFamily: 'Lato',
@@ -51,7 +51,7 @@ export default function FooterPage({ currentPage, subtitle, divider, children, p
       <Grid container className={classes.container}>
 
         <Grid item zeroMinWidth xs={12}>
-          <SubNav currentPage={currentPage} />
+          <FooterPageSubNav currentPage={currentPage} />
         </Grid>
 
         <Grid item zeroMinWidth xs={12}>
@@ -78,7 +78,7 @@ export default function FooterPage({ currentPage, subtitle, divider, children, p
 }
 
 FooterPage.propTypes = {
-  page: oneOf(['support', 'contributors', 'license', 'releases',]).isRequired,
+  currentPage: oneOf(['support', 'contributors', 'license', 'releases',]).isRequired,
   subtitle: string,
   divider: bool,
   children: node,
