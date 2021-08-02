@@ -1,35 +1,46 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core'
-
-// TODO: bottom two cards have background images
+import backgroundImg from '../images/backgrounds/thin-sand-bar.svg';
+import LinkBtn from './linkbtn';
 
 const useStyles = makeStyles((theme) => ({
     featuresPage: {
         flexGrow: 1,
         width: '100%',
         textAlign: 'center',
-    }
+        maxHeight: 1517
+    },
+    gridContainer: {
+        height: '100%'
+    },
+    buttonContainer: {
+        background: `url(${backgroundImg})`,
+        width: '100%',
+        height: 300,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 }));
 
 export interface FeatureProps {
-    children: JSX.Element[] | JSX.Element
+    children: JSX.Element[] | JSX.Element,
+    id: string,
 }
 
 const Features = ({ children }: FeatureProps) => {
     const classes = useStyles();
 
-    // TODO: add button target to support pane
     return (
-    <div id="features" className={classes.featuresPage}>
-        <Grid container>
-            {children}
-        </Grid>
-        <Button variant="contained">
-            Get Started
-        </Button>
-    </div>
+        <div id="features" className={classes.featuresPage}>
+            <Grid container alignItems='center' justifyContent='center' className={classes.gridContainer}>
+                {children}
+                <Grid item className={classes.buttonContainer}>
+                    <LinkBtn linkTo="/#get-started" text="get started"/>
+                </Grid>
+            </Grid>
+        </div>
 )}
 
 export default Features
