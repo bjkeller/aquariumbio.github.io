@@ -4,11 +4,14 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core'
 import WorkflowCard from './workflowcard'
+import backgroundImg from '../images/backgrounds/circle-fish.svg';
+import LinkBtn from './linkbtn';
+import { useStaticQuery, graphql } from "gatsby"
 
 const useStyles = makeStyles((theme) => ({
     openContentCard: {
-        background: 'linear-gradient(229.75deg, #A6EEFA -8.47%, #2399CC 170.4%)',
-        height: 849,
+        background: `url(${backgroundImg})`,
+        height: 961,
         width: '100%'
     },
     headlineText: {
@@ -16,8 +19,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 50,
         fontStyle: 'normal',
         fontWeight: 400,
-        // line-height: 60px;
-        // letter-spacing: 0px;
         textAlign: 'center',
         width: 1296
     },
@@ -26,8 +27,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 21,
         fontStyle: 'normal',
         fontWeight: 400,
-        // line-height: 30px;
-        // letter-spacing: 0px;
         textAlign: 'center',
         width: 1174
     },
@@ -53,8 +52,46 @@ export interface ContentProps {
 const Content = ({ headline, text }: ContentProps) => {
     const classes = useStyles();
 
+    const workflowSearchQuery = useStaticQuery(graphql`
+    {
+      githubData {
+        data {
+          search {
+            repos {
+              repo {
+                description
+                url
+                readme {
+                  text
+                }
+                name
+                updatedAt
+                languages {
+                  nodes {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+    const workflows = workflowSearchQuery.githubData.data.search.repos.map((wf) => {
+        const workflow = {
+            description: wf.repo.description,
+            name: wf.repo.name,
+            updatedAt: wf.repo.updatedAt,
+            languages: wf.repo.languages.nodes.map((repo) => repo.name),
+            url: wf.repo.url
+        };
+        return workflow;
+    });
+
     return (
-        <Grid id="open-source-content" container direction='column' alignItems='center' className={classes.openContentCard}>
+        <Grid id="community-workflows" container direction='column' alignItems='center' justifyContent='center' className={classes.openContentCard}>
             <Grid item className={classes.topSpacer} />
             <Grid item>
                 <Typography variant='h2' className={classes.headlineText}>
@@ -68,41 +105,42 @@ const Content = ({ headline, text }: ContentProps) => {
                 </Typography>
             </Grid>
             <Grid item className={classes.cardSpacer} />
-            <Grid item container direction='row' alignItems='center' justify='center' spacing={1}>
+            <Grid item container direction='row' alignItems='center' justifyContent='center' spacing={1}>
                 <Grid item>
                     <WorkflowCard
-                        workflow='Simple Workflow'
-                        description='A workflow to demonstrate.'
+                        workflow={workflows[0].name}
+                        description={workflows[0].description}
+                        link={`/workflow/${workflows[0].name}`}
                     />
                 </Grid>
                 <Grid item>
                     <WorkflowCard
-                        workflow='Simple Workflow'
-                        description='A workflow to demonstrate.'
+                        workflow={workflows[1].name}
+                        description={workflows[1].description}
+                        link={`/workflow/${workflows[1].name}`}
                     />
                 </Grid>
                 <Grid item>
                     <WorkflowCard
-                        workflow='Simple Workflow'
-                        description='A workflow to demonstrate.'
+                        workflow={workflows[2].name}
+                        description={workflows[2].description}
+                        link={`/workflow/${workflows[2].name}`}
                     />
                 </Grid>
                 <Grid item>
                     <WorkflowCard
-                        workflow='Simple Workflow'
-                        description='A workflow to demonstrate.'
+                        workflow={workflows[3].name}
+                        description={workflows[3].description}
+                        link={`/workflow/${workflows[3].name}`}
                     />
                 </Grid>
             </Grid>
             <Grid item className={classes.buttonSpacer} />
             <Grid item>
-                <Button variant="contained">
-                    Get Started
-                </Button>
+                <LinkBtn linkTo="/#get-started" text="get started"/>
             </Grid>
-
         </Grid>
     )
-}
+};
 
-export default Content
+export default Content;
