@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link';
 import { Link as GatsbyLink } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
+import LinkBtn from './linkbtn';
 
 const useStyles = makeStyles({
  root: {
@@ -20,15 +21,14 @@ const useStyles = makeStyles({
 const HeaderLinks = () => {
     const classes = useStyles();
     return (
-        <Grid item container direction='row' alignItems='center' justify='space-evenly' spacing={2}>
-
+        <Grid item container direction='row' alignItems='center' justifyContent='space-evenly' spacing={2}>
             <Grid item>
-                <Link component={GatsbyLink} to="#features" className={classes.root}>
+                <Link component={GatsbyLink} to="/#features" className={classes.root}>
                     FEATURES
                 </Link>
             </Grid>
             <Grid item>
-                <Link component={GatsbyLink} to="/community-workflows" className={classes.root}>
+                <Link component={GatsbyLink} to="/#community-workflows" className={classes.root}>
                     COMMUNITY WORKFLOWS
                 </Link>
             </Grid>
@@ -38,7 +38,7 @@ const HeaderLinks = () => {
                 </Link>
             </Grid>
             <Grid item>
-                <Link component={GatsbyLink} to="/get-started" className={classes.root}>
+                <Link component={GatsbyLink} to="/#get-started" className={classes.root}>
                     GET STARTED
                 </Link>
             </Grid>
