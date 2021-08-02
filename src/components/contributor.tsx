@@ -1,13 +1,8 @@
 import React from "react";
-import Layout from "../components/layout";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import SubNav from '../components/subnav';
-import ContactForm from '../components/contactform';
 import Divider from "@material-ui/core/Divider";
-import Link from '@material-ui/core/Link';
-import FooterPageBottomNav from '../components/footerpagebottomnav';
 import { ContributorInfo } from "../pagedata/contributors-data";
 
 const useStyles = makeStyles((theme) => ({
