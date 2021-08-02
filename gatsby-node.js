@@ -34,7 +34,6 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
-console.log(result)
     // Create workflow pages.
     const workflows = result.data.githubData.data.search.repos
 
