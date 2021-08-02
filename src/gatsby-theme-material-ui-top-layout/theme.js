@@ -1,6 +1,6 @@
-const { createMuiTheme } = require("@material-ui/core");
+const { createTheme } = require("@material-ui/core");
 
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
         text: {
             primary: '#333333',
