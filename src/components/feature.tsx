@@ -4,21 +4,16 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, rgbToHex } from '@material-ui/core'
 
+
 const useStyles = makeStyles((theme) => ({
-    // TODO: features have different backgrounds with layered images
-    // may need to pass in theme with props -- covered by material-ui docs?
-    // see note in features.tsx
     featureCard: {
-        height: 702,
-        background: 'linear-gradient(0deg, rgba(64, 211, 253, 0.15) 0%, rgba(203, 241, 255, 0.0257813) 82.81%, rgba(232, 248, 255, 0) 100%)',
+        height: 961,
     },
     headlineText: {
         fontFamily: 'Lato',
         fontSize: 36,
         fontStyle: 'normal',
         fontWeight: 400,
-        // line-height: 44px;
-        // letter-spacing: 0px;
         textAlign: 'center',
         width: 682
     },
@@ -27,8 +22,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 18,
         fontStyle: 'normal',
         fontWeight: 400,
-        // line-height: 26px;
-        // letter-spacing: 0px;
         textAlign: 'left',
         width: 576
     },
@@ -40,20 +33,24 @@ const useStyles = makeStyles((theme) => ({
     },
     imageSpacer: {
         height: '30px'
-    }
+    },
+    background1: {
+        backgroundImage: props => props.background,
+        height: 700,
+    },
 }));
 
 export interface FeatureProps {
     children: JSX.Element[] | JSX.Element,
     headline: String,
-    text: String
+    text: String,
+    background: string
 }
 
-const Feature = ({ children, headline, text }: FeatureProps) => {
-    const classes = useStyles();
-
+const Feature = ({ children, headline, text, background }: FeatureProps) => {
+    const classes = useStyles({ background: `url(${background})`});
     return (
-        <Grid item container xs={6} direction='column' alignItems='center' className={classes.featureCard} zeroMinWidth>
+        <Grid item container xs={6} direction='column' alignItems='center' className={`${classes.featureCard} ${classes.background1}`} zeroMinWidth>
             <Grid item zeroMinWidth className={classes.topSpacer} />
             <Grid item zeroMinWidth>
                 <Typography variant='h2' className={classes.headlineText}>{headline}</Typography>
