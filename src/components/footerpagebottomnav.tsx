@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export interface FooterPageBottomNavProps {
-    pageLeft: FooterPage,
-    pageRight: FooterPage
+    pageLeft: FooterPage | string,
+    pageRight: FooterPage | string,
 };
 
 export default function FooterPageBottomNav({ pageLeft, pageRight }: FooterPageBottomNavProps) {
