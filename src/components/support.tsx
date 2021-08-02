@@ -2,10 +2,12 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core'
+import ContactForm from '../components/contactform';
+import backgroundImg from '../images/backgrounds/blue-scene.svg'
 
 const useStyles = makeStyles((theme) => ({
     supportCard: {
-        backgroundColor: '#2399CC',
+        backgroundImage: `url(${backgroundImg})`,
         backgroundSize: 'cover',
         backgroundPostion: 'center',
         backgroundRepeat: 'no-repeat',
@@ -52,7 +54,7 @@ const Support = ({ headline, text }: SupportProps) => {
     const classes = useStyles();
 
     return (
-        <Grid item container direction='column' alignItems='center' className={classes.supportCard}>
+        <Grid id="get-started" item container direction='column' alignItems='center' justifyContent='center' className={classes.supportCard}>
             <Grid item className={classes.topSpacer} />
             <Grid item >
                 <Typography variant='h2' className={classes.headlineText}>
@@ -67,7 +69,7 @@ const Support = ({ headline, text }: SupportProps) => {
             </Grid>
             <Grid item className={classes.formSpacer} />
             <Grid item >
-                form
+                <ContactForm />
             </Grid>
         </Grid>
     )
