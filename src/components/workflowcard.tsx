@@ -1,16 +1,20 @@
-import React from 'react'
-import Card from '@material-ui/core/Card'
+import React from 'react';
+import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import { Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import IconLinkBtn from './iconlinkbtn';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const useStyles = makeStyles({
     workflow: {
         borderRadius: 0,
         height: '260px',
-        width: '268px'
+        width: '268px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
     },
     title: {
         fontFamily: 'Lato',
@@ -25,15 +29,19 @@ const useStyles = makeStyles({
         fontStyle: 'normal',
         fontWeight: 400,
         textAlign: 'left'
+    },
+    cardActions: {
+        justifyContent: 'flex-end',
     }
 });
 
 export interface WorkflowProps {
     workflow: string,
-    description: string
+    description: string,
+    link: string,
 }
 
-const WorkflowCard = ({workflow, description}: WorkflowProps) => {
+const WorkflowCard = ({workflow, description, link}: WorkflowProps) => {
     const classes = useStyles();
 
     return (
@@ -46,8 +54,8 @@ const WorkflowCard = ({workflow, description}: WorkflowProps) => {
                     {description}
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size="small">da button ></Button>
+            <CardActions className={classes.cardActions}>
+                <IconLinkBtn linkTo={link} icon={<ChevronRightIcon />} />
             </CardActions>
         </Card>
     );
