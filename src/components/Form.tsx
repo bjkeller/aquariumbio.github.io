@@ -1,9 +1,43 @@
 import * as React from "react";
+import type { IFieldProps } from './Field';
+import axios from 'axios';
+import { makeStyles } from '@material-ui/core/';
+import Button from '@material-ui/core/Button';
+import ThankYou from './thankyou';
+
+/** Define form styles */
+const useStyles = makeStyles((theme) => ({
+    form: {
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'center',
+        width: 500,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    field: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignContent: 'center',
+      alignItems: 'flex-start',
+      paddingBottom: 5,
+    },
+    input: {
+      width: '100%',
+    },
+    button: {
+      marginTop: theme.spacing(1),
+      background: '#40D3FD',
+      color: '#FFF'
+    },
+
+}));
 
 export interface IFormContext
-  extends IFormState {
+  extends FormState {
   /* Function that allows values in the values state to be set */
-  setValues: (values: IValues) => void;
+  setValues: (values: FormValues) => void;
 
     /* Function that validates a field */
   validate: (fieldName: string) => void;
@@ -15,36 +49,45 @@ export interface IFormContext
 // export const FormContext = React.createContext<IFormContext|undefined>(undefined);
 export const FormContext = React.createContext({} as IFormContext);
 
-
-export interface IFields {
+interface MuiStyle {
+  [key: string]: string | number | Function;
+}
+export interface FormFields {
   [key: string]: IFieldProps;
 }
-interface IFormProps {
+interface FormProps {
   /* The http path that the form will be posted to */
   action: string;
 
   /* The props for all the fields on the form */
-  fields: IFields;
+  fields: FormFields;
 
   /* A prop which allows content to be injected */
   render: () => React.ReactNode;
+
+  /* Style props for MUI makeStyles hook */
+  classes: {
+    form: MuiStyle;
+    buttonDiv: MuiStyle;
+    button: MuiStyle;
+  }
 }
 
-export interface IValues {
+export interface FormValues {
   /* Key value pairs for all the field values with key being the field name */
   [key: string]: any;
 }
 
-export interface IErrors {
+export interface FormErrors {
   /* The validation error messages for each field (key is the field name */
   [key: string]: string;
 }
 
-export interface IFormState {
+export interface FormState {
   /* The field values */
-  values: IValues;
+  values: FormValues;
   /* The field validation error messages */
-  errors: IErrors;
+  errors: FormErrors;
 
   /* Whether the form has been successfully submitted */
   submitSuccess?: boolean;
@@ -52,11 +95,11 @@ export interface IFormState {
 
 /**
  * Validates whether a field has a value
- * @param {IValues} values - All the field values in the form
+ * @param {FormValues} values - All the field values in the form
  * @param {string} fieldName - The field to validate
  * @returns {string} - The error message
  */
-export const required = (values: IValues, fieldName: string): string =>
+export const required = (values: FormValues, fieldName: string): string =>
   values[fieldName] === undefined ||
   values[fieldName] === null ||
   values[fieldName] === ""
@@ -65,11 +108,11 @@ export const required = (values: IValues, fieldName: string): string =>
 
 /**
  * Validates whether a field is a valid email
- * @param {IValues} values - All the field values in the form
+ * @param {FormValues} values - All the field values in the form
  * @param {string} fieldName - The field to validate
  * @returns {string} - The error message
  */
-export const isEmail = (values: IValues, fieldName: string): string =>
+export const isEmail = (values: FormValues, fieldName: string): string =>
   values[fieldName] &&
   values[fieldName].search(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -79,13 +122,13 @@ export const isEmail = (values: IValues, fieldName: string): string =>
 
 /**
  * Validates whether a field is within a certain amount of characters
- * @param {IValues} values - All the field values in the form
+ * @param {FormValues} values - All the field values in the form
  * @param {string} fieldName - The field to validate
  * @param {number} length - The maximum number of characters
  * @returns {string} - The error message
  */
 export const maxLength = (
-  values: IValues,
+  values: FormValues,
   fieldName: string,
   length: number
 ): string =>
@@ -93,31 +136,31 @@ export const maxLength = (
     ? `This can not exceed ${length} characters`
     : "";
 
-export class Form extends React.Component<IFormProps, IFormState> {
-  constructor(props: IFormProps) {
+export class Form extends React.Component<FormProps, FormState> {
+  constructor(props: FormProps) {
     super(props);
 
-    const errors: IErrors = {};
-    const values: IValues = {};
+    const errors: FormErrors = {};
+    const values: FormValues = {};
     this.state = {
       errors,
       values
     };
-  }
+  };
 
   /**
    * Stores new field values in state
-   * @param {IValues} values - The new field values
+   * @param {FormValues} values - The new field values
   */
-  private setValues = (values: IValues) => {
+  setValues = (values: FormValues) => {
   this.setState({ values: { ...this.state.values, ...values } });
   };
 
   /**
    * Returns whether there are any errors in the errors object that is passed in
-   * @param {IErrors} errors - The field errors
+   * @param {FormErrors} errors - The field errors
    */
-  private haveErrors(errors: IErrors) {
+  haveErrors(errors: FormErrors) {
     let haveError: boolean = false;
     Object.keys(errors).map((key: string) => {
       if (errors[key].length > 0) {
@@ -131,12 +174,10 @@ export class Form extends React.Component<IFormProps, IFormState> {
    * Handles form submission
    * @param {React.FormEvent<HTMLFormElement>} e - The form event
    */
-  private handleSubmit = async (
+  handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-
-    console.log(this.state.values);
 
     if (this.validateForm()) {
       const submitSuccess: boolean = await this.submitForm();
@@ -148,12 +189,13 @@ export class Form extends React.Component<IFormProps, IFormState> {
    * Executes the validation rules for all the fields on the form and sets the error state
    * @returns {boolean} - Returns true if the form is valid
    */
-  private validateForm(): boolean {
-    const errors: IErrors = {};
+  validateForm(): boolean {
+    const errors: FormErrors = {};
     Object.keys(this.props.fields).map((fieldName: string) => {
       errors[fieldName] = this.validate(fieldName);
     });
     this.setState({ errors });
+    console.log(errors);
     return !this.haveErrors(errors);
   };
 
@@ -162,7 +204,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
    * @param {string} fieldName - The field to validate
    * @returns {string} - The error message
    */
-  private validate = (fieldName: string): string => {
+  validate = (fieldName: string): string => {
     let newError: string = "";
 
     if (
@@ -186,36 +228,65 @@ export class Form extends React.Component<IFormProps, IFormState> {
    * Submits the form to the http api
    * @returns {boolean} - Whether the form submission was successful or not
    */
-  private async submitForm(): Promise<boolean> {
-    try {
-      const response = await fetch(this.props.action, {
-        method: "post",
-        mode:'no-cors',
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        }),
-        body: JSON.stringify(this.state.values)
-      });
-      if (response.status === 400) {
-        /* Map the validation errors to IErrors */
-        let responseBody: any;
-        responseBody = await response.json();
-        const errors: IErrors = {};
-        Object.keys(responseBody).map((key: string) => {
-          // For ASP.NET core, the field names are in title case - so convert to camel case
-          const fieldName = key.charAt(0).toLowerCase() + key.substring(1);
-          errors[fieldName] = responseBody[key];
-        });
-        this.setState({ errors });
-      }
-      return response.ok;
-    } catch (ex) {
-      return false;
-    }
+  async submitForm(): Promise<boolean> {
+    var data = this.state.values;
+    var encoded = Object.keys(data).map(function(k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+    }).join('&');
+
+    axios({
+      method: "post",
+      url: this.props.action,
+      data: encoded,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/x-www-form-urlencoded"
+      },
+    })
+    .then(function (response) {
+      // handle success
+      // var thankYouMessage = form.querySelector(".thankyou_message");
+      // if (thankYouMessage) {
+      //   thankYouMessage.style.display = "block";
+      // }
+      return true;
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response);
+      return false
+    });
+
+    // const body = JSON.stringify(this.state.values);
+
+    // try {
+    //   const response = await fetch(this.props.action, {
+    //     method: "post",
+    //     headers: new Headers({
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //       Accept: "application/x-www-form-urlencoded"
+    //     }),
+    //     body: body,
+    //   });
+    //   if (response.status === 400) {
+    //     /* Map the validation errors to IErrors */
+    //     let responseBody: any;
+    //     responseBody = await response.json();
+    //     const errors: FormErrors = {};
+    //     Object.keys(responseBody).map((key: string) => {
+    //       // For ASP.NET core, the field names are in title case - so convert to camel case
+    //       const fieldName = key.charAt(0).toLowerCase() + key.substring(1);
+    //       errors[fieldName] = responseBody[key];
+    //     });
+    //     this.setState({ errors });
+    //   }
+    //   return response.ok;
+    // } catch (ex) {
+    //   return false;
+    // }
   }
 
-  public render() {
+  render() {
     const { submitSuccess, errors } = this.state;
     const context: IFormContext = {
       ...this.state,
@@ -224,24 +295,23 @@ export class Form extends React.Component<IFormProps, IFormState> {
     };
     return (
       <FormContext.Provider value={context}>
-        <form onSubmit={this.handleSubmit} noValidate={true}>
+        <form onSubmit={this.handleSubmit} noValidate={true} className={this.props.classes.form}>
           <div className="container">
-            {/* TODO - render fields */}
-
             {this.props.render()}
 
-            <div className="form-group">
-              <button
+            <div className={`${this.props.classes.buttonDiv} form-group`}>
+              <Button
+                variant="contained"
                 type="submit"
-                className="btn btn-primary"
+                className={this.props.classes.button}
                 disabled={this.haveErrors(errors)}
               >
-                Submit
-              </button>
+                  Contact Now
+              </Button>
             </div>
             {submitSuccess && (
-              <div className="alert alert-info" role="alert">
-                The form was successfully submitted!
+              <div className="thankyou_message" style={{ display: "none" }}>
+                <ThankYou />
               </div>
             )}
             {submitSuccess === false &&
