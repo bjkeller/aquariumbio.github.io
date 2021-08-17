@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core'
-import ContactForm from '../components/contactform';
+import { ContactUsForm } from '../components/ContactUsForm';
 import backgroundImg from '../images/backgrounds/blue-scene.svg'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 21,
         fontStyle: 'normal',
         fontWeight: 400,
-        // line-height: 30px;
-        // letter-spacing: 0px;
         textAlign: 'center',
         color: '#FFFFFF',
         width: 968
@@ -69,7 +67,7 @@ const Support = ({ headline, text }: SupportProps) => {
             </Grid>
             <Grid item className={classes.formSpacer} />
             <Grid item >
-                <ContactForm />
+                <ContactUsForm />
             </Grid>
         </Grid>
     )

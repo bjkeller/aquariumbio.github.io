@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form, FormFields, required, isEmail, maxLength } from "./Form";
+import { Form, FormFields, required, isEmail } from "./Form";
 import { Field } from "./Field";
 import { makeStyles } from '@material-ui/core/';
 
@@ -32,14 +32,9 @@ const useStyles = makeStyles((theme) => ({
       background: '#40D3FD',
       color: '#FFF'
     },
-
 }));
 
-export interface ContactUsFormProps {
-    support?: boolean, // If support is true show message box
-}
-
-export const ContactUsForm = ({support}: ContactUsFormProps) => {
+export const ContactUsForm = () => {
   const fields: FormFields = {
     firstName: {
       id: "firstName",
@@ -67,19 +62,6 @@ export const ContactUsForm = ({support}: ContactUsFormProps) => {
       label: "Role",
       validation: { rule: required }
     },
-    // reason: {
-    //   id: "reason",
-    //   label: "Reason",
-    //   editor: "dropdown",
-    //   options: ["", "Marketing", "Support", "Feedback", "Jobs"],
-    //   validation: { rule: required }
-    // },
-    message: {
-      id: "message",
-      label: "Message",
-      editor: "multilinetextbox",
-      placeholder: "I’m having trouble with Aquarium."
-    }
   };
   return (
     <Form
@@ -88,15 +70,11 @@ export const ContactUsForm = ({support}: ContactUsFormProps) => {
       classes={useStyles()}
       render={() => (
         <React.Fragment>
-
           <Field {...fields.firstName} />
           <Field {...fields.lastName} />
           <Field {...fields.email} />
           <Field {...fields.lab} />
           <Field {...fields.role} />
-          {support &&
-            <Field {...fields.message} />
-          }
         </React.Fragment>
       )}
     />

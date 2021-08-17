@@ -1,38 +1,8 @@
 import * as React from "react";
 import type { IFieldProps } from './Field';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/';
 import Button from '@material-ui/core/Button';
 import ThankYou from './thankyou';
-
-/** Define form styles */
-const useStyles = makeStyles((theme) => ({
-    form: {
-        flexGrow: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        textAlign: 'center',
-        width: 500,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    },
-    field: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignContent: 'center',
-      alignItems: 'flex-start',
-      paddingBottom: 5,
-    },
-    input: {
-      width: '100%',
-    },
-    button: {
-      marginTop: theme.spacing(1),
-      background: '#40D3FD',
-      color: '#FFF'
-    },
-
-}));
 
 export interface IFormContext
   extends FormState {
@@ -153,7 +123,7 @@ export class Form extends React.Component<FormProps, FormState> {
    * @param {FormValues} values - The new field values
   */
   setValues = (values: FormValues) => {
-  this.setState({ values: { ...this.state.values, ...values } });
+    this.setState({ values: { ...this.state.values, ...values } });
   };
 
   /**
@@ -195,7 +165,6 @@ export class Form extends React.Component<FormProps, FormState> {
       errors[fieldName] = this.validate(fieldName);
     });
     this.setState({ errors });
-    console.log(errors);
     return !this.haveErrors(errors);
   };
 
@@ -234,7 +203,7 @@ export class Form extends React.Component<FormProps, FormState> {
         return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
     }).join('&');
 
-    axios({
+    const submitSuccess = await axios({
       method: "post",
       url: this.props.action,
       data: encoded,
@@ -245,45 +214,24 @@ export class Form extends React.Component<FormProps, FormState> {
     })
     .then(function (response) {
       // handle success
-      // var thankYouMessage = form.querySelector(".thankyou_message");
-      // if (thankYouMessage) {
-      //   thankYouMessage.style.display = "block";
-      // }
       return true;
     })
     .catch(function (response) {
       //handle error
-      console.log(response);
+      if (response.status === 400) {
+        /* Map the validation errors to IErrors */
+        const errors: FormErrors = {};
+        Object.keys(response).map((key: string) => {
+          // For ASP.NET core, the field names are in title case - so convert to camel case
+          const fieldName = key.charAt(0).toLowerCase() + key.substring(1);
+          errors[fieldName] = response[key];
+        });
+
+        this.setState({ errors});
+      }
       return false
     });
-
-    // const body = JSON.stringify(this.state.values);
-
-    // try {
-    //   const response = await fetch(this.props.action, {
-    //     method: "post",
-    //     headers: new Headers({
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //       Accept: "application/x-www-form-urlencoded"
-    //     }),
-    //     body: body,
-    //   });
-    //   if (response.status === 400) {
-    //     /* Map the validation errors to IErrors */
-    //     let responseBody: any;
-    //     responseBody = await response.json();
-    //     const errors: FormErrors = {};
-    //     Object.keys(responseBody).map((key: string) => {
-    //       // For ASP.NET core, the field names are in title case - so convert to camel case
-    //       const fieldName = key.charAt(0).toLowerCase() + key.substring(1);
-    //       errors[fieldName] = responseBody[key];
-    //     });
-    //     this.setState({ errors });
-    //   }
-    //   return response.ok;
-    // } catch (ex) {
-    //   return false;
-    // }
+    return submitSuccess;
   }
 
   render() {
@@ -295,39 +243,38 @@ export class Form extends React.Component<FormProps, FormState> {
     };
     return (
       <FormContext.Provider value={context}>
-        <form onSubmit={this.handleSubmit} noValidate={true} className={this.props.classes.form}>
-          <div className="container">
-            {this.props.render()}
+        {submitSuccess ? (<ThankYou />) : (
+          <form onSubmit={this.handleSubmit} noValidate={true} className={`gfrom ${this.props.classes.form}`}>
+            <div className="container">
+              {this.props.render()}
 
-            <div className={`${this.props.classes.buttonDiv} form-group`}>
-              <Button
-                variant="contained"
-                type="submit"
-                className={this.props.classes.button}
-                disabled={this.haveErrors(errors)}
-              >
-                  Contact Now
-              </Button>
-            </div>
-            {submitSuccess && (
-              <div className="thankyou_message" style={{ display: "none" }}>
-                <ThankYou />
+              <div className={`${this.props.classes.buttonDiv} form-elements form-group`}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className={this.props.classes.button}
+                  disabled={this.haveErrors(errors)}
+                >
+                    Contact Now
+                </Button>
               </div>
-            )}
-            {submitSuccess === false &&
-              !this.haveErrors(errors) && (
-                <div className="alert alert-danger" role="alert">
-                  Sorry, an unexpected error has occurred
-                </div>
-              )}
-            {submitSuccess === false &&
-              this.haveErrors(errors) && (
-                <div className="alert alert-danger" role="alert">
-                  Sorry, the form is invalid. Please review, adjust and try again
-                </div>
-              )}
-          </div>
-        </form>
+
+              {submitSuccess === false &&
+                !this.haveErrors(errors) && (
+                  <div className="alert alert-danger" role="alert">
+                    Sorry, an unexpected error has occurred
+                  </div>
+                )}
+
+              {submitSuccess === false &&
+                this.haveErrors(errors) && (
+                  <div className="alert alert-danger" role="alert">
+                    Sorry, the form is invalid. Please review, adjust and try again
+                  </div>
+                )}
+            </div>
+          </form>
+        )}
       </FormContext.Provider>
     );
   }

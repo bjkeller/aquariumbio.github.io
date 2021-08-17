@@ -23,13 +23,14 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
     },
   },
-  label: {
-    color: '#FFFFFF !important',
-  }
+  white: {
+    color: '#FFF !important',
+  },
+
 }));
 
 /* The available editors for the field */
-type Editor = "textbox" | "multilinetextbox" | "dropdown" | "textfield";
+type Editor = "multilinetextbox" | "dropdown" | "textfield";
 
 export interface IValidation {
   rule: (values: FormValues, fieldName: string, args: any) => string;
@@ -41,13 +42,10 @@ export interface IFieldProps {
   id: string;
 
   /* The label text for the field */
-  label?: string;
+  label: string;
 
   /* The editor for the field */
   editor?: Editor;
-
-  /* The drop down items for the field */
-  options?: string[];
 
   /* The field value */
   value?: any;
@@ -57,15 +55,18 @@ export interface IFieldProps {
 
   /* The placeholder for the field */
   placeholder?: string;
+
+  /* Is the field on a support form */
+  support?: boolean;
 }
 
 export const Field = ({
   id,
   label,
   editor,
-  options,
   value,
-  placeholder
+  placeholder,
+  support
 }: IFieldProps) => {
 
   const classes = useStyles();
@@ -77,43 +78,18 @@ export const Field = ({
    */
   const getError = (errors: FormErrors): string => (errors ? errors[id] : "");
 
-  /**
-   * Gets the inline styles for editor
-   * @param {FormErrors} errors - All the errors from the form
-   * @returns {any} - The style object
-   */
-  const getEditorStyle = (errors: FormErrors): any =>
-    getError(errors) ? { borderColor: "red" } : {};
-
   return (
     <FormContext.Consumer>
       {(context: IFormContext) => (
         <div className="form-group">
-          {label &&
-            <InputLabel
-              htmlFor={id}
-              className={classes.label}
-            >
-              {label}
-            </InputLabel>}
-
-          {editor!.toLowerCase() === "textbox" && (
-            <input
-              id={id}
-              type="text"
-              value={value}
-              style={getEditorStyle(context.errors)}
-              onChange={
-                (e: React.FormEvent<HTMLInputElement>) =>
-                  context.setValues({ [id]: e.currentTarget.value })
-              }
-              onBlur={() => context.validate(id)}
-              className="form-control"
-            />
-          )}
+          <InputLabel
+            htmlFor={id}
+            className={ support ? classes.black : classes.white}
+          >
+            {label}
+          </InputLabel>
 
           {editor!.toLowerCase() === "textfield" && (
-            // <div className={`${classes.field} form-control`}>
               <TextField
                 variant="outlined"
                 margin="dense"
@@ -121,7 +97,6 @@ export const Field = ({
                 className={classes.input}
                 type="text"
                 id={id}
-                // style={getEditorStyle(context.errors)}
                 value={value}
                 onChange={
                   (e: React.FormEvent<HTMLInputElement>) =>
@@ -132,7 +107,6 @@ export const Field = ({
                 helperText={!!context.errors[id] ? getError(context.errors) : ' '}
                 required
               />
-            // </div>
           )}
 
           {editor!.toLowerCase() === "multilinetextbox" && (
@@ -158,35 +132,13 @@ export const Field = ({
               />
             </div>
           )}
-
-          {editor!.toLowerCase() === "dropdown" && (
-            <select
-              id={id}
-              name={id}
-              value={value}
-              style={getEditorStyle(context.errors)}
-              onChange={
-                (e: React.FormEvent<HTMLSelectElement>) =>
-                  context.setValues({ [id]: e.currentTarget.value })
-              }
-              onBlur={() => context.validate(id)}
-              className="form-control"
-            >
-              {options &&
-                options.map(option => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-            </select>
-          )}
-
         </div>
       )}
     </FormContext.Consumer>
-);
+  );
 };
 
 Field.defaultProps = {
-  editor: "textfield"
+  editor: "textfield",
+  support: false,
 };
