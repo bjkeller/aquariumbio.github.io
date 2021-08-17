@@ -69,8 +69,7 @@ export default function Support() {
       pageRight="contributors"
     >
       <Form
-        action="https://script.google.com/macros/s/AKfycbzYVzaqdK9KI5CJr8lY4RQLqaCqr6rhGkeK5XDwtt1tsKEk_FwP-rmgrkU204BJ_337/exec"
-        fields={fields}
+        action="https://script.google.com/macros/s/AKfycbyCDq3JR-RzpQm_L8DC9sFQApKKmwcLYkX--5aNnODW2-v7Yh2GydolHbQkde3lbEUJ/exec"        fields={fields}
         classes={useStyles()}
         render={() => (
             <React.Fragment>
