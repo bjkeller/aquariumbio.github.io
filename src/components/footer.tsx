@@ -105,6 +105,12 @@ const Footer = () => {
                         RELEASES
                     </Link>
                 </Grid>
+                <Grid item>
+                    {/* TODO UPDATE LINK */}
+                    <Link underline="none" component={GatsbyLink} to="https://aquariumbio.github.io/" className={classes.root} >
+                        DOCUMENTATION
+                    </Link>
+                </Grid>
             </Grid>
 
             <Grid item xs={12} className={classes.copyrightSpacer} />
