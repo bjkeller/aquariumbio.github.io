@@ -73,7 +73,7 @@ export const required = (values: FormValues, fieldName: string): string =>
   values[fieldName] === undefined ||
   values[fieldName] === null ||
   values[fieldName] === ""
-    ? "This must be populated"
+    ? `Please enter a ${fieldName}`
     : "";
 
 /**
@@ -87,7 +87,7 @@ export const isEmail = (values: FormValues, fieldName: string): string =>
   values[fieldName].search(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   )
-    ? "This must be in a valid email format"
+    ? "Please enter a valid email"
     : "";
 
 /**
