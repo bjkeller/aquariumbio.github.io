@@ -83,10 +83,13 @@ export const required = (values: FormValues, fieldName: string): string =>
  * @returns {string} - The error message
  */
 export const isEmail = (values: FormValues, fieldName: string): string =>
-  values[fieldName] &&
+  values[fieldName] === undefined ||
+  values[fieldName] === null ||
+  values[fieldName] === "" ||
+ ( values[fieldName] &&
   values[fieldName].search(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-  )
+  ))
     ? "Please enter a valid email"
     : "";
 
@@ -241,6 +244,7 @@ export class Form extends React.Component<FormProps, FormState> {
       setValues: this.setValues,
       validate: this.validate,
     };
+
     return (
       <FormContext.Provider value={context}>
         {submitSuccess ? (<ThankYou />) : (
@@ -253,7 +257,7 @@ export class Form extends React.Component<FormProps, FormState> {
                   variant="contained"
                   type="submit"
                   className={this.props.classes.button}
-                  disabled={this.haveErrors(errors)}
+                  disabled={Object.keys(context.values).length === 0 || this.haveErrors(errors)}
                 >
                     Contact Now
                 </Button>

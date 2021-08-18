@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme) => ({
     button: {
       marginTop: theme.spacing(1),
       background: '#40D3FD',
-      color: '#FFF'
+      color: '#FFF',
+      '&.Mui-disabled': {
+        backgroundColor: '#EFEFEF',
+      }
     },
 }))
 
