@@ -102,7 +102,7 @@ export const Field = ({
                   (e: React.FormEvent<HTMLInputElement>) =>
                     context.setValues({ [id]: e.currentTarget.value })
                 }
-                onBlur={() => context.validate(id)}
+                onBlur={() => id === 'email' && context.validate(id)}
                 error={!!context.errors[id]}
                 helperText={!!context.errors[id] ? getError(context.errors) : ' '}
                 required
