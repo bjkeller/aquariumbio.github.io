@@ -63,7 +63,10 @@ export const ContactUsForm = () => {
     role: {
       id: "role",
       label: "Role",
-      validation: { rule: required }
+      validation: { rule: required },
+      editor: "dropdown",
+      options: [ "Undergraduate", "Postdoc", "Research Scientist", "Lab Manager", "Lab Director" ],
+      placeholder: "Choose your role"
     },
   };
   return (

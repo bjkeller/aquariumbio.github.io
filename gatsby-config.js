@@ -48,7 +48,7 @@ module.exports = {
         url: `https://api.github.com/graphql`,
 
         // token: required by the GitHub API
-        token: `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`,
+        token: `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`,
 
         // GraphQLquery: defaults to a search query
         graphQLQuery: `
